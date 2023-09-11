@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+
+install_full_command() {
+    poetry install
+}
+
+update_command() {
+    git pull origin main
+    poetry update
+}
+
+sql_app_command() {
+    poetry run uvicorn sql_app.main:app --reload
+}
+
+show_help() {
+    echo "Usage: ./run [option]"
+    echo "Options:"
+    echo "  install                Install with dev and test dependencies"
+    echo "  update                 Git pull and update dependencies"
+    echo "  sql-app                Run sql_app"
+    echo "  help                   Show this help message"
+}
+
+if [ -z "$1" ]; then
+    show_help
+else
+    case "$1" in
+        "install") install_full_command ;;
+        "update") update_command ;;
+        "sql-app") sql_app_command ;;
+        *) show_help ;;
+    esac
+fi
