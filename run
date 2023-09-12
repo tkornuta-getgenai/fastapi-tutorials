@@ -17,6 +17,10 @@ bigger_app_command() {
     poetry run uvicorn bigger_app.main:app --reload
 }
 
+oauth2_password_bearer_command() {
+    poetry run uvicorn oauth2_password_bearer.main:app --reload
+}
+
 show_help() {
     echo "Usage: ./run [option]"
     echo "Options:"
@@ -24,6 +28,7 @@ show_help() {
     echo "  update                 Git pull and update dependencies"
     echo "  sql-app                Run sql_app"
     echo "  big-app                Run bigger_app"
+    echo "  oauth2-pwd Run oauth2_password_bearer"
     echo "  help                   Show this help message"
 }
 
@@ -35,6 +40,7 @@ else
         "update") update_command ;;
         "sql-app") sql_app_command ;;
         "bigger-app") bigger_app_command ;;
+        "oauth2-pwd") oauth2_password_bearer_command ;;
         *) show_help ;;
     esac
 fi
