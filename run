@@ -20,8 +20,13 @@ bigger_app_command() {
 oauth2_password_bearer_command() {
     poetry run uvicorn oauth2_password_bearer.main:app --reload
 }
+
 oauth2_password_bearer_jwt_command() {
     poetry run uvicorn oauth2_password_bearer_jwt.main:app --reload
+}
+
+oauth2_password_bearer_jwt_scopes_command() {
+    poetry run uvicorn oauth2_password_bearer_jwt_scopes.main:app --reload
 }
 
 show_help() {
@@ -32,7 +37,8 @@ show_help() {
     echo "  sql-app                Run sql_app"
     echo "  big-app                Run bigger_app"
     echo "  oauth2-pwd             Run oauth2_password_bearer"
-    echo "  oauth2-jwt             Run oauth2_password_bearer"
+    echo "  oauth2-jwt             Run oauth2_password_bearer_jwt"
+    echo "  oauth2-scopes          Run oauth2_password_bearer_jwt_scopes"
     echo "  help                   Show this help message"
 }
 
@@ -46,6 +52,7 @@ else
         "bigger-app") bigger_app_command ;;
         "oauth2-pwd") oauth2_password_bearer_command ;;
         "oauth2-jwt") oauth2_password_bearer_jwt_command ;;
+        "oauth2-scopes") oauth2_password_bearer_jwt_scopes_command ;;
         *) show_help ;;
     esac
 fi
