@@ -13,12 +13,17 @@ sql_app_command() {
     poetry run uvicorn sql_app.main:app --reload
 }
 
+bigger_app_command() {
+    poetry run uvicorn bigger_app.main:app --reload
+}
+
 show_help() {
     echo "Usage: ./run [option]"
     echo "Options:"
     echo "  install                Install with dev and test dependencies"
     echo "  update                 Git pull and update dependencies"
     echo "  sql-app                Run sql_app"
+    echo "  big-app                Run bigger_app"
     echo "  help                   Show this help message"
 }
 
@@ -29,6 +34,7 @@ else
         "install") install_full_command ;;
         "update") update_command ;;
         "sql-app") sql_app_command ;;
+        "bigger-app") bigger_app_command ;;
         *) show_help ;;
     esac
 fi
