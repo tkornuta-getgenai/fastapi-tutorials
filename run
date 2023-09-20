@@ -9,8 +9,17 @@ update_command() {
     poetry update
 }
 
+clear_cache_command() {
+    find . -name "*.pyc" -exec rm -f {} \;
+    find . -name "__pycache__" -exec rm -rf {} \;
+}
+
 sql_app_command() {
     poetry run uvicorn sql_app.main:app --reload
+}
+
+async_app_command() {
+    poetry run uvicorn async_app.main:app --reload
 }
 
 bigger_app_command() {
@@ -29,12 +38,15 @@ oauth2_password_bearer_jwt_scopes_command() {
     poetry run uvicorn oauth2_password_bearer_jwt_scopes.main:app --reload
 }
 
+
 show_help() {
     echo "Usage: ./run [option]"
     echo "Options:"
     echo "  install                Install with dev and test dependencies"
     echo "  update                 Git pull and update dependencies"
+    echo "  clear-cache            Clear cache"
     echo "  sql-app                Run sql_app"
+    echo "  async-app              Run async_app"
     echo "  big-app                Run bigger_app"
     echo "  oauth2-pwd             Run oauth2_password_bearer"
     echo "  oauth2-jwt             Run oauth2_password_bearer_jwt"
@@ -48,7 +60,9 @@ else
     case "$1" in
         "install") install_full_command ;;
         "update") update_command ;;
+        "clear-cache") clear_cache_command ;;
         "sql-app") sql_app_command ;;
+        "async-app") async_app_command ;;
         "bigger-app") bigger_app_command ;;
         "oauth2-pwd") oauth2_password_bearer_command ;;
         "oauth2-jwt") oauth2_password_bearer_jwt_command ;;
